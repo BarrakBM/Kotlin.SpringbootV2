@@ -28,16 +28,16 @@ class HelloWorldController(
 
     // Post
     @PostMapping("/my-name")
-    fun sayMyName( @RequestBody request: SayMyNameRequest) = usersRepository.save(User(name = request.name))
+    fun sayMyName( @RequestBody request: SayMyNameRequest) = usersRepository.save(UserEntity(name = request.name, age = request.age))
 
     @GetMapping("/my-name")
-    fun getName(): MutableList<User> {
+    fun getName(): MutableList<UserEntity> {
         return usersRepository.findAll()
     }
 
     @PostMapping("/orders")
     fun orders( @RequestBody request: OrderRequest): Order{
-        val order = (Order(null, LocalDateTime.now() ,request.user , request.restaurant, request.items.toMutableList()))
+        val order = (Order(null ,request.username , request.restaurant, request.items))
         return orderRepository.save(order)
     }
 
@@ -51,13 +51,14 @@ class HelloWorldController(
 }
 
 data class SayMyNameRequest(
-    val name: String
+    val name: String,
+    val age: Int
 )
 
 data class OrderRequest(
-    val user: String,
+    val username: String,
     val restaurant: String,
-    val items: MutableList<String>
+    val items: String
 
 )
 

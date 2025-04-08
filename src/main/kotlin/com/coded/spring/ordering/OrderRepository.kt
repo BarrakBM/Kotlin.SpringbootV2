@@ -15,15 +15,15 @@ data class Order(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
-    var createdAt: LocalDateTime = LocalDateTime.now(),
+//    var createdAt: LocalDateTime = LocalDateTime.now(),
     // @column since user is reserved word in sql ;/
-    @Column(name = "'user'")
-    var user: String,
+
+    var username: String,
     var restaurant: String,
-    var items: MutableList<String> = mutableListOf()
+    var items: String
 
 
 ){
-    constructor(): this(null, LocalDateTime.now() ,"", "", mutableListOf())
+    constructor(): this(null,"", "", "")
 
 }
