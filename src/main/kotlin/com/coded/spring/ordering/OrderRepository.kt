@@ -1,10 +1,10 @@
 package com.coded.spring.ordering
 
 
+import com.coded.spring.ordering.users.User
 import jakarta.inject.Named
 import jakarta.persistence.*
 import org.springframework.data.jpa.repository.JpaRepository
-import java.time.LocalDateTime
 
 @Named
 interface OrderRepository : JpaRepository<Order, Long>
@@ -15,15 +15,11 @@ data class Order(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
-//    var createdAt: LocalDateTime = LocalDateTime.now(),
-    // @column since user is reserved word in sql ;/
-
-    var username: String,
-    var restaurant: String,
-    var items: String
+//    @OneToOne(targetEntity = User)
+    var user_id: Long
 
 
 ){
-    constructor(): this(null,"", "", "")
+    constructor(): this(null,1)
 
 }

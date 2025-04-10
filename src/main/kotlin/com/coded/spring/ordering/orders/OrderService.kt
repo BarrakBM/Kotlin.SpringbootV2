@@ -1,7 +1,9 @@
 package com.coded.spring.ordering.orders
 
+import com.coded.spring.ordering.Order
 import com.coded.spring.ordering.OrderRepository
 import jakarta.inject.Named
+import java.math.BigInteger
 
 @Named
 class OrderService(
@@ -9,18 +11,13 @@ class OrderService(
 ) {
 
     fun listOrders(): List<Order> = orderRepository.findAll().map{
-        Order(
-            username = it.username,
-            restaurant = it.restaurant,
-            items = it.items
+        com.coded.spring.ordering.Order(
+            id = it.id,
+            user_id = it.user_id,
+
 
 
         )
     }
 }
 
-data class Order(
-    val username: String,
-    val restaurant: String,
-    val items: String
-)

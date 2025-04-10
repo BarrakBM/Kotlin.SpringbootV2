@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import java.time.LocalDateTime
 
 @RestController
 class HelloWorldController(
@@ -36,8 +35,8 @@ class HelloWorldController(
     }
 
     @PostMapping("/orders")
-    fun orders( @RequestBody request: OrderRequest): Order{
-        val order = (Order(null ,request.username , request.restaurant, request.items))
+    fun orders( @RequestBody request: OrderRequest): Order {
+        val order = (Order(null ,1))
         return orderRepository.save(order)
     }
 
@@ -56,9 +55,8 @@ data class SayMyNameRequest(
 )
 
 data class OrderRequest(
-    val username: String,
-    val restaurant: String,
-    val items: String
+    val user_id: Int,
+
 
 )
 
