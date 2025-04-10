@@ -7,12 +7,11 @@ class ItemsService(
     private val itemsRepository: ItemsRepository
 ) {
 
-    fun listItems(): List<Items> = itemsRepository.findAll().map {
-        Items(
+    fun listItems(): List<ItemEntity> = itemsRepository.findAll().map {
+        ItemEntity(
             id = it.id,
             order_id = it.order_id,
             quantity = it.quantity,
-            price = it.price,
             name = it.name
         )
 

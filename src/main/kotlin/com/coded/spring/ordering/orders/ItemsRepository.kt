@@ -5,20 +5,21 @@ import jakarta.persistence.*
 import org.springframework.data.jpa.repository.JpaRepository
 
 @Named
-interface ItemsRepository: JpaRepository<Items, Long>
+interface ItemsRepository: JpaRepository<ItemEntity, Long>
 
 @Entity
 @Table(name = "items")
-data class Items(
+data class ItemEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
-    var order_id: Int,
+    var name: String,
     var quantity: Int,
-    var price: Double,
+    var order_id: Int,
+
 //    @Column("'name'")
-    var name: String
+
 
 ){
-    constructor(): this(null, 1, 1, 1.0, "")
+    constructor(): this(null, "", 0, 0)
 }

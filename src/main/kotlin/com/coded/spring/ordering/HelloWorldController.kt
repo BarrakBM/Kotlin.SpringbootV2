@@ -34,14 +34,14 @@ class HelloWorldController(
         return usersRepository.findAll()
     }
 
-    @PostMapping("/orders")
-    fun orders( @RequestBody request: OrderRequest): Order {
-        val order = (Order(null ,1))
-        return orderRepository.save(order)
-    }
+//    @PostMapping("/orders")
+//    fun orders( @RequestBody request: OrderRequest): OrderEntity {
+//        val order = (OrderEntity(null,user))
+//        return orderRepository.save(order)
+//    }
 
     @GetMapping("/orders")
-    fun getOrders(): MutableList<Order>{
+    fun getOrders(): MutableList<OrderEntity>{
         return orderRepository.findAll()
     }
 
