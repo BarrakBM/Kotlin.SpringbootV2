@@ -18,12 +18,12 @@ class OrderService(
     }
 
     // creating new order
-    fun createOrder(userId: Long){
+    fun createOrder(userId: Long) {
         val user = userRepository.findById(userId).get()
         val newOrder = OrderEntity(user=user)
+        // save order
         orderRepository.save(newOrder)
     }
-
 
 }
 

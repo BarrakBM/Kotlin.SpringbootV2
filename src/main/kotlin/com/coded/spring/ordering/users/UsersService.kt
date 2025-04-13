@@ -10,6 +10,7 @@ class UsersService(
 
     fun listUsers(): List<User> = usersRepository.findAll().map {
         User(
+            id = it.id,
             name = it.name,
             age = it.age
         )
@@ -17,6 +18,7 @@ class UsersService(
 }
 
 data class User(
+    val id: Long?,
     val name: String,
     val age: Int
 )

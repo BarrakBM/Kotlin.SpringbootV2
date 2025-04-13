@@ -13,18 +13,18 @@ class OrderController(
 
 ) {
 
-    @GetMapping("/orders/list")
+    @GetMapping("/orders/orders-list")
     fun orders() = orderService.listOrders()
 
     // create order
-    @PostMapping("/orders/create-order")
-
+    @PostMapping("/orders/orders-list")
     fun createOrders(@RequestBody request: CreateOrderRequest){
-        orderService.createOrder( userId = request.userId )
+        return orderService.createOrder( userId = request.userId )
     }
 
 }
 
 data class CreateOrderRequest(
     val userId: Long
+
 )
