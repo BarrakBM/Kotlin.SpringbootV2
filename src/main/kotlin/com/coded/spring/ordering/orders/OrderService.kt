@@ -1,10 +1,7 @@
 package com.coded.spring.ordering.orders
 
-import com.coded.spring.ordering.OrderEntity
-import com.coded.spring.ordering.OrderRepository
-import com.coded.spring.ordering.UsersRepository
+import com.coded.spring.ordering.users.UsersRepository
 import jakarta.inject.Named
-import java.math.BigInteger
 
 @Named
 class OrderService(
@@ -23,7 +20,11 @@ class OrderService(
         val newOrder = OrderEntity(user=user)
         // save order
         orderRepository.save(newOrder)
-    }
 
-}
+//        val Items = request.items.map{
+//            ItemEntity(name = it.)
+//        }
+//    }
+
+}}
 

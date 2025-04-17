@@ -1,8 +1,8 @@
-package com.coded.spring.ordering
+package com.coded.spring.ordering.orders
 
 
-import com.coded.spring.ordering.orders.ItemEntity
-import com.coded.spring.ordering.users.User
+import com.coded.spring.ordering.items.ItemEntity
+import com.coded.spring.ordering.users.UserEntity
 import jakarta.inject.Named
 import jakarta.persistence.*
 import org.springframework.data.jpa.repository.JpaRepository

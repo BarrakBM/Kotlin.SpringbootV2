@@ -1,6 +1,10 @@
 package com.coded.spring.ordering
 
 
+import com.coded.spring.ordering.orders.OrderEntity
+import com.coded.spring.ordering.orders.OrderRepository
+import com.coded.spring.ordering.users.UserEntity
+import com.coded.spring.ordering.users.UsersRepository
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -26,8 +30,8 @@ class HelloWorldController(
     fun settings() = "Settings!"
 
     // Post
-    @PostMapping("/my-name")
-    fun sayMyName( @RequestBody request: SayMyNameRequest) = usersRepository.save(UserEntity(name = request.name, age = request.age))
+//    @PostMapping("/my-name")
+//    fun sayMyName( @RequestBody request: SayMyNameRequest) = usersRepository.save(UserEntity(name = request.name, age = request.age))
 
     @GetMapping("/my-name")
     fun getName(): MutableList<UserEntity> {

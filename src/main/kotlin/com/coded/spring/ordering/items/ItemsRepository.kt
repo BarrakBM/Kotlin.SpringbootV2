@@ -1,4 +1,4 @@
-package com.coded.spring.ordering.orders
+package com.coded.spring.ordering.items
 
 import jakarta.inject.Named
 import jakarta.persistence.*

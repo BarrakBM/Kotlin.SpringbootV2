@@ -1,4 +1,4 @@
-package com.coded.spring.ordering.orders
+package com.coded.spring.ordering.items
 
 import jakarta.inject.Named
 
@@ -16,4 +16,15 @@ class ItemsService(
         )
 
     }
+
+    fun createItem(request: CreateItemRequestDTO): Any{
+        val item = ItemEntity(
+            name = request.name,
+            quantity = request.quantity,
+            order_id = request.order_id
+        )
+        return itemsRepository.save(item)
+    }
+
+
 }
