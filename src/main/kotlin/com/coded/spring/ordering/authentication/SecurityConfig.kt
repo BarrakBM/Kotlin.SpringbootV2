@@ -33,7 +33,7 @@ class SecurityConfig(
                 it
                     .requestMatchers("/authentication/**").permitAll()
                     // menu end points available for all users
-                    .requestMatchers("/items/list").permitAll()
+                    .requestMatchers("/menu").permitAll()
                     // registration endpoint
                     .requestMatchers("/register").permitAll()
                     // to submit orders (only for authenticated)
