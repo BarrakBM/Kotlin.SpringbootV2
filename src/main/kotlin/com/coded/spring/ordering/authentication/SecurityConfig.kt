@@ -35,6 +35,7 @@ class SecurityConfig(
                     // menu end points available for all users
                     .requestMatchers("/menu").permitAll()
                     // registration endpoint
+                    .requestMatchers("/profile").authenticated()
                     .requestMatchers("/register").permitAll()
                     // to submit orders (only for authenticated)
                     .requestMatchers("/orders/**").authenticated()
