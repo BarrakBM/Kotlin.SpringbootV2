@@ -15,12 +15,25 @@ import org.springframework.web.bind.annotation.RestController
 class HelloWorldController(
     val usersRepository: UsersRepository,
     val orderRepository: OrderRepository,
+
+    // welcome endpoint
     @Value("\${server-welcome-message}")
-    val welcomeMessage: String
+    val welcomeMessage: String,
+    //the feature
+    @Value("\${feature.festive.enabled:false}")
+    val festiveStatus: Boolean,
+
+    @Value("\${festive-welcome-message: Eidkom Mubarak}")
+    private val festiveWelcomeMessage: String
 ){
 
     @GetMapping("/hello")
-    fun helloWorld() =  "$welcomeMessage Barrak"
+
+    fun helloWorld() =  if(festiveStatus){
+        festiveWelcomeMessage
+    }else {
+        "$welcomeMessage Barrak"
+    }
 
 
     @GetMapping("/cart")
