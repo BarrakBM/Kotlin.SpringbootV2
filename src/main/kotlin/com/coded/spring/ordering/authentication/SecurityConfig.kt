@@ -34,13 +34,10 @@ class SecurityConfig(
                     .requestMatchers("/authentication/**").permitAll()
                     // menu end points available for all users
                     .requestMatchers("/menu").permitAll()
-                    .requestMatchers("/hello").permitAll()
+                    // swagger
+                    .requestMatchers("/api-docs").permitAll()
                     // registration endpoint
-                    .requestMatchers("/profile").authenticated()
                     .requestMatchers("/register").permitAll()
-                    // to submit orders (only for authenticated)
-                    .requestMatchers("/orders/**").permitAll()
-                    .requestMatchers("/items/create").permitAll()
                     // rest of endpoints will need authentication
                     //.anyRequest().authenticated()
             }

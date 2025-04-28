@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import com.coded.spring.ordering.users.RegistrationRequest
+import io.swagger.v3.oas.annotations.tags.Tag
 
-
+@Tag(name = "UserAPI")
 @RestController
 class UsersController(
     private val usersService: UsersService,
