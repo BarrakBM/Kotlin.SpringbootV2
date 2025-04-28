@@ -12,9 +12,9 @@ class ProfilesController(
 ){
     // user creating profile
     @PostMapping("/profile")
-    fun saveInfoKyc(@RequestBody request: ProfileRequestDto): Any {
+    fun createOrUpdateProfile(@RequestBody request: ProfileRequestDto): Any {
         try{
-            return profilesService.creatOrUpdateProf(request)
+            return profilesService.createOrUpdateProf(request)
         } catch (e: IllegalArgumentException) {
             return ResponseEntity.badRequest().body(mapOf("error" to e.message))
         }

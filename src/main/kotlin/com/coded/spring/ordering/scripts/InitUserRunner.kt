@@ -1,6 +1,5 @@
-package com.coded.spring.ordering
+package com.coded.spring.ordering.scripts
 
-import com.coded.spring.ordering.users.Roles
 import com.coded.spring.ordering.users.UserEntity
 import com.coded.spring.ordering.users.UsersRepository
 import org.springframework.boot.CommandLineRunner

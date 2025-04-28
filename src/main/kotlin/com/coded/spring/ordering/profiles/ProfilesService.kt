@@ -12,7 +12,7 @@ open class ProfilesService(
 ) {
 
     // create or update info for profiles
-    fun creatOrUpdateProf(request: ProfileRequestDto): Any{
+    fun createOrUpdateProf(request: ProfileRequestDto): Any{
 
         // get the username from the security contextholer
         val username = SecurityContextHolder.getContext().authentication.name
@@ -23,6 +23,7 @@ open class ProfilesService(
 
         // check if user have a profile
         val existingProfile = profilesRepository.findByUserId(user)
+
         val profile = if( existingProfile != null){
             // update existing profile
             val updateProfile = existingProfile.copy(
@@ -31,6 +32,7 @@ open class ProfilesService(
                 phoneNumber = request.phoneNumber
             )
             profilesRepository.save(updateProfile)
+
         } else { // if user doesn't have a profile
             // create a new profile
             val createProfile = ProfileEntity(

@@ -2,6 +2,7 @@ package com.coded.spring.ordering.items
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 
@@ -13,8 +14,8 @@ class ItemsController(
     @GetMapping("/items/list")
     fun items() = itemsService.listItems()
 
-//    @PostMapping("/items/create")
-//    fun addItems(request: CreateItemRequestDTO): ItemEntity{
-//
-//    }
+    @PostMapping("/items/create")
+    fun addItems(@RequestBody request: CreateItemRequestDTO): ItemDTO {
+        return itemsService.createItem(request)
+    }
 }

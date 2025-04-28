@@ -1,5 +1,6 @@
 package com.coded.spring.ordering.items
 
+import com.coded.spring.ordering.orders.OrderEntity
 import jakarta.inject.Named
 import jakarta.persistence.*
 import org.springframework.data.jpa.repository.JpaRepository
@@ -15,11 +16,14 @@ data class ItemEntity(
     var id: Long? = null,
     var name: String,
     var quantity: Int,
-    var order_id: Int,
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    var order: OrderEntity,
 
 //    @Column("'name'")
 
 
 ){
-    constructor(): this(null, "", 0, 0)
+    constructor(): this(null, "", 0, OrderEntity())
 }

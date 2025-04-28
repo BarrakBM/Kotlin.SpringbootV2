@@ -21,7 +21,7 @@ data class OrderEntity(
     val user: UserEntity,
 
     // join
-    @OneToMany(mappedBy = "order_id")
+    @OneToMany(mappedBy = "order")
     val items: List<ItemEntity>? = null
 
 

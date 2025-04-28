@@ -1,29 +1,43 @@
 package com.coded.spring.ordering.items
 
+import com.coded.spring.ordering.orders.OrderRepository
 import jakarta.inject.Named
 
 @Named
 class ItemsService(
-    private val itemsRepository: ItemsRepository
+    private val itemsRepository: ItemsRepository,
+    private val orderRepository: OrderRepository  // Added to fetch orders
+
 ) {
 
-    fun listItems(): List<ItemEntity> = itemsRepository.findAll().map {
-        ItemEntity(
+    fun listItems(): List<Unit> = itemsRepository.findAll().map {
+        ItemDTO(
             id = it.id,
-            order_id = it.order_id,
+            name = it.name,
             quantity = it.quantity,
-            name = it.name
+            orderId = it.order.id
         )
 
     }
 
-    fun createItem(request: CreateItemRequestDTO): Any{
+    fun createItem(request: CreateItemRequestDTO): ItemDTO {
+        val order = orderRepository.findById(request.order_id)
+            .orElseThrow { IllegalArgumentException("Order not found with id: ${request.order_id}") }
+
         val item = ItemEntity(
             name = request.name,
             quantity = request.quantity,
-            order_id = request.order_id
+            order = order
         )
-        return itemsRepository.save(item)
+
+        val savedItem = itemsRepository.save(item)
+
+        return ItemDTO(
+            id = savedItem.id,
+            name = savedItem.name,
+            quantity = savedItem.quantity,
+            orderId = savedItem.order.id
+        )
     }
 
 
