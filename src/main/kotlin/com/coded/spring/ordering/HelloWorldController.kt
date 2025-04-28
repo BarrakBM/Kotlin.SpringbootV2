@@ -5,6 +5,7 @@ import com.coded.spring.ordering.orders.OrderEntity
 import com.coded.spring.ordering.orders.OrderRepository
 import com.coded.spring.ordering.users.UserEntity
 import com.coded.spring.ordering.users.UsersRepository
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -13,11 +14,13 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class HelloWorldController(
     val usersRepository: UsersRepository,
-    val orderRepository: OrderRepository
+    val orderRepository: OrderRepository,
+    @Value("\${server-welcome-message}")
+    val welcomeMessage: String
 ){
 
     @GetMapping("/hello")
-    fun helloWorld() =  "Hello World!"
+    fun helloWorld() =  "$welcomeMessage Barrak"
 
 
     @GetMapping("/cart")

@@ -32,6 +32,7 @@ class SecurityConfig(
             .authorizeHttpRequests {
                 it
                     .requestMatchers("/authentication/**").permitAll()
+                    .requestMatchers("/hello").permitAll()
                     // menu end points available for all users
                     .requestMatchers("/menu").permitAll()
                     // swagger
