@@ -9,3 +9,6 @@ data class OrderDTO(
     val items: List<ItemDTO>?
 )
 
+data class OrdersListDTO(
+    val orders: List<OrderDTO>
+)

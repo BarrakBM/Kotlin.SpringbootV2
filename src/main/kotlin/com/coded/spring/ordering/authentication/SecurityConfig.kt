@@ -40,7 +40,7 @@ class SecurityConfig(
                     // registration endpoint
                     .requestMatchers("/register").permitAll()
                     // rest of endpoints will need authentication
-                    //.anyRequest().authenticated()
+                    .anyRequest().authenticated()
             }
             .sessionManagement {
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)

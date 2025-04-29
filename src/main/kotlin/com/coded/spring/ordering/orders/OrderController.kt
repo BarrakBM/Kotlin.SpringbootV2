@@ -16,7 +16,10 @@ class OrderController(
 ) {
 
     @GetMapping("/orders/orders")
-    fun orders() = orderService.listOrders()
+    fun orders(): OrdersListDTO {
+        val ordersList = orderService.listOrders()
+        return OrdersListDTO(orders = ordersList)
+    }
 
     // create order
     @PostMapping("/orders/orders")

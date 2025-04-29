@@ -17,7 +17,7 @@ class HelloWorldController(
     val orderRepository: OrderRepository,
 
     // welcome endpoint
-    @Value("\${server-welcome-message}")
+    @Value("\${server-welcome-message:test}")
     val welcomeMessage: String,
     //the feature
     @Value("\${feature.festive.enabled:false}")
