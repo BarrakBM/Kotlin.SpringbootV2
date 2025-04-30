@@ -5,11 +5,15 @@ import com.coded.spring.ordering.authentication.AuthRequest
 import com.coded.spring.ordering.authentication.AuthResponse
 import com.coded.spring.ordering.authentication.jwt.JwtService
 import com.coded.spring.ordering.items.CreateItemRequestDTO
+import com.coded.spring.ordering.items.ItemDTO
+import com.coded.spring.ordering.items.ItemsListDTO
 import com.coded.spring.ordering.items.ItemsRepository
 import com.coded.spring.ordering.orders.CreateOrderRequest
 import com.coded.spring.ordering.orders.OrderDTO
 import com.coded.spring.ordering.orders.OrderRepository
 import com.coded.spring.ordering.orders.OrdersListDTO
+import com.coded.spring.ordering.profiles.ProfileRequestDto
+import com.coded.spring.ordering.profiles.ProfileResponseDto
 import com.coded.spring.ordering.users.RegistrationRequest
 import com.coded.spring.ordering.users.UserEntity
 import com.coded.spring.ordering.users.UsersRepository
@@ -23,6 +27,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.boot.test.web.client.exchange
+import org.springframework.boot.test.web.client.getForEntity
 import org.springframework.boot.test.web.client.postForEntity
 import org.springframework.context.annotation.Profile
 import org.springframework.http.*
@@ -30,6 +35,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.util.MultiValueMap
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
@@ -226,5 +232,116 @@ class ApplicationTests {
 
 	}
 
+	//5th test
+	@Test
+	fun `as a developer, I can test a user can create profile`(){
+		val token = getAuthToken()
+
+		// create profile
+		val createProfile = ProfileRequestDto(
+			firstName = "Harvey",
+			lastName = "Specter",
+			phoneNumber = "333-111-3333"
+		)
+		//create response
+		val response: ResponseEntity<ProfileResponseDto> = restTemplate.postForEntity(
+			"/profile",
+			authRequest(createProfile, token),
+			ProfileResponseDto::class.java
+		)
+		//verify responses
+		assertEquals(HttpStatus.OK, response.statusCode)
+		assertEquals("Harvey", response.body?.firstName)
+		assertEquals("Specter", response.body?.lastName)
+		assertEquals("333-111-3333", response.body?.phoneNumber)
+	}
+
+	//6th test
+	@Test
+	fun `as a developer, I can test a user can update profile`(){
+		val token = getAuthToken()
+
+		val updateProfile = ProfileRequestDto(
+			firstName = "Mike",
+			lastName = "Ross",
+			phoneNumber = "111-222-2222"
+		)
+		val response2: ResponseEntity<ProfileResponseDto> = restTemplate.postForEntity(
+			"/profile",
+			authRequest(updateProfile, token),
+			ProfileResponseDto::class.java
+		)
+
+		assertEquals(HttpStatus.OK, response2.statusCode)
+		assertEquals("Mike", response2.body?.firstName)
+		assertEquals("Ross", response2.body?.lastName)
+		assertEquals("111-222-2222", response2.body?.phoneNumber)
+	}
+
+	//7th test
+	@Test
+	fun `As a developer, I can add items to an order`(){
+		val token = getAuthToken()
+
+		//get user id
+		val user = usersRepository.findByUsername(testUser)
+		assertNotNull(user)
+
+		// Add items to the order
+		val item1 = CreateItemRequestDTO(
+			name = "Machboos",
+			quantity = 1,
+			order_id = user?.id!!
+		)
+
+		val item2 = CreateItemRequestDTO(
+			name = "Laban",
+			quantity = 4,
+			order_id = user.id!!
+		)
+
+		// Create items
+		restTemplate.postForEntity(
+			"/items/create",
+			authRequest(item1, token),
+			ItemDTO::class.java
+		)
+
+		restTemplate.postForEntity(
+			"/items/create",
+			authRequest(item2, token),
+			ItemDTO::class.java
+		)
+
+		// Get the order id
+		val headers = HttpHeaders()
+		headers.setBearerAuth(token)
+		val getRequest = HttpEntity<Any>(headers)
+
+		// list items
+		val response: ResponseEntity<ItemsListDTO> = restTemplate.exchange(
+			"/orders/orders",
+			HttpMethod.GET,
+			getRequest,
+			ItemsListDTO::class.java
+
+		)
+		assertEquals(HttpStatus.OK, response.statusCode)
+		val items = response.body
+		assertNotNull(items)
+	}
+
+	//8th test
+	@Test
+	fun `as a developer, I can test reading the menu`(){
+
+		val response = restTemplate.getForEntity(
+			"/menu",
+			Object::class.java
+		)
+		assertEquals(HttpStatus.OK, response.statusCode)
+		assertNotNull(response)
+
+	}
 
 }

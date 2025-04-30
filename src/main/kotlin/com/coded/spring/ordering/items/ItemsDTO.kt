@@ -13,3 +13,7 @@ data class ItemDTO(
     val quantity: Int,
     val orderId: Long?
 )
+
+data class ItemsListDTO(
+    val items: List<ItemDTO>
+)
