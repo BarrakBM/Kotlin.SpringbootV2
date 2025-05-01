@@ -1,6 +1,6 @@
-package com.coded.spring.ordering.authentication
+package authentication
 
-import com.coded.spring.ordering.authentication.jwt.JwtAuthFilter
+import authentication.jwt.JwtAuthFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -32,13 +32,13 @@ class SecurityConfig(
             .authorizeHttpRequests {
                 it
                     .requestMatchers("/authentication/**").permitAll()
+                    .requestMatchers("/authentication/login").permitAll()
                     .requestMatchers("/hello").permitAll()
-                    // menu end points available for all users
-                    .requestMatchers("/menu").permitAll()
+                    .requestMatchers("/authentication/check-token").authenticated()
                     // swagger
                     .requestMatchers("/api-docs").permitAll()
                     // registration endpoint
-                    .requestMatchers("/register").permitAll()
+
                     // rest of endpoints will need authentication
                     .anyRequest().authenticated()
             }

@@ -1,7 +1,7 @@
-package com.coded.spring.ordering.authentication
+package authentication
 
-import com.coded.spring.ordering.users.UserEntity
-import com.coded.spring.ordering.users.UsersRepository
+import authentication.users.UserEntity
+import authentication.users.UsersRepository
 import jakarta.inject.Named
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails

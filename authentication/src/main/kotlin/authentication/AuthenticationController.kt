@@ -1,12 +1,15 @@
-package com.coded.spring.ordering.authentication
+package authentication
 
-import com.coded.spring.ordering.authentication.jwt.JwtService
+import RegistrationRequestDTO
+import authentication.jwt.JwtService
+import authentication.users.UsersService
 import io.swagger.v3.oas.annotations.tags.Tag
+import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.*
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.web.bind.annotation.*
-
+import java.security.Principal
 
 @Tag(name = "AuthenticationAPI")
 @RestController
@@ -14,7 +17,8 @@ import org.springframework.web.bind.annotation.*
 class AuthController(
     private val authenticationManager: AuthenticationManager,
     private val userDetailsService: UserDetailsService,
-    private val jwtService: JwtService
+    private val jwtService: JwtService,
+    private val usersService: UsersService
 ) {
 
     // login page
@@ -39,7 +43,30 @@ class AuthController(
             throw UsernameNotFoundException("Invalid user request!")
         }
     }
+
+    // register
+    @PostMapping("/register")
+    fun addUser(@RequestBody request: RegistrationRequestDTO) {
+        usersService.registerUsers(request)
+        ResponseEntity.ok()
+    }
+
+
+    // check the token
+    @PostMapping("/check-token")
+    fun checkToken(
+        principal: Principal
+    ): CheckTokenResponse {
+        return CheckTokenResponse(
+            userId = usersService.findByUsername(principal.name)
+        )
+    }
+
 }
+
+data class CheckTokenResponse(
+    val userId: Long
+)
 
 data class AuthRequest(
     val username: String,

@@ -1,4 +1,4 @@
-package com.coded.spring.ordering.authentication.jwt
+package authentication.jwt
 
 
 import io.jsonwebtoken.*

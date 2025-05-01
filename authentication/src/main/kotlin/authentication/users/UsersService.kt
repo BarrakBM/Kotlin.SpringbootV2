@@ -1,4 +1,6 @@
-package com.coded.spring.ordering.users
+package authentication.users
+
+import RegistrationRequestDTO
 
 import jakarta.inject.Named
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -22,7 +24,7 @@ class UsersService(
         )
     }
 
-    fun registerUsers(request: RegistrationRequest): UserEntity {
+    fun registerUsers(request: RegistrationRequestDTO): UserEntity {
 
         //check if username exists already
         if(usersRepository.existsByUsername(request.username)){

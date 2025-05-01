@@ -1,4 +1,4 @@
-package com.coded.spring.ordering.authentication.jwt
+package authentication.jwt
 
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.*
