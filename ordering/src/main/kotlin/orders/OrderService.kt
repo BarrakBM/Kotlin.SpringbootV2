@@ -1,7 +1,7 @@
-package com.coded.spring.ordering.orders
+package orders
 
-import com.coded.spring.ordering.items.ItemDTO
-import com.coded.spring.ordering.users.UsersRepository
+import authentication.users.UsersRepository
+import items.ItemDTO
 import jakarta.inject.Named
 
 @Named

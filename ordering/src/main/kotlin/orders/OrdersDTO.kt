@@ -1,6 +1,6 @@
-package com.coded.spring.ordering.orders
+package orders
 
-import com.coded.spring.ordering.items.ItemDTO
+import items.ItemDTO
 
 // return this when user asking for order list
 data class OrderDTO(

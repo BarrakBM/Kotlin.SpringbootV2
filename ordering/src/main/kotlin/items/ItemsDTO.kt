@@ -1,4 +1,4 @@
-package com.coded.spring.ordering.items
+package items
 
 data class CreateItemRequestDTO(
 

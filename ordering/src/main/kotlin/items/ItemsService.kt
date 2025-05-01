@@ -1,6 +1,6 @@
-package com.coded.spring.ordering.items
+package items
 
-import com.coded.spring.ordering.orders.OrderRepository
+import orders.OrderRepository
 import jakarta.inject.Named
 
 @Named
