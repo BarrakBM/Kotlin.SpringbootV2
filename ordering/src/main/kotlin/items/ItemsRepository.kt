@@ -17,13 +17,12 @@ data class ItemEntity(
     var name: String,
     var quantity: Int,
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    var order: OrderEntity,
+    @Column(name = "order_id")
+    var orderId: Long,
 
 //    @Column("'name'")
 
 
 ){
-    constructor(): this(null, "", 0, OrderEntity())
+    constructor(): this(null, "", 0, 0)
 }

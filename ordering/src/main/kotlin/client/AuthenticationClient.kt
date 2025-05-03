@@ -13,15 +13,20 @@ class AuthenticationClient {
 
     fun checkToken(token: String): CheckTokenResponse {
         val restTemplate = RestTemplate()
-        val url = "http://localhost:8081/authentication/v1/check-token"
+        val url = "http://localhost:8082/authentication/check-token"
+
+        // Create headers with token
+        val headers = HttpHeaders()
+        headers.set("Authorization", "Bearer $token")
+
+        // Create request entity with headers
+        val requestEntity = HttpEntity<String>(headers)
+
         val response = restTemplate.exchange<CheckTokenResponse>(
             url = url,
             method = HttpMethod.POST,
-            requestEntity = HttpEntity<String>(
-                MultiValueMap.fromMultiValue(mapOf("Authorization" to listOf("Bearer $token")))
-            ),
-            object : ParameterizedTypeReference<CheckTokenResponse>() {
-            }
+            requestEntity = requestEntity,
+            object : ParameterizedTypeReference<CheckTokenResponse>() {}
         )
         return response.body ?: throw IllegalStateException("Check token response has no body ...")
     }

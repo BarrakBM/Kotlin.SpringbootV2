@@ -2,6 +2,8 @@ package orders
 
 import authentication.users.UsersService
 import io.swagger.v3.oas.annotations.tags.Tag
+import items.ItemDTO
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -23,13 +25,21 @@ class OrderController(
 
     // create order
     @PostMapping("/orders/orders")
-    fun createOrders(@RequestBody request: CreateOrderRequest){
-        return orderService.createOrder( userId = request.userId )
+    fun createOrder(
+        request: HttpServletRequest,
+        @RequestBody body: CreateOrderRequest
+    ): CreateOrderResponse {
+        val userId = request.getAttribute("userId") as Long
+        val order = orderService.createOrder(userId, body.items)
+        return CreateOrderResponse(
+            order.id,
+            order.items
+        )
     }
 
 }
 
-data class CreateOrderRequest(
-    val userId: Long
-
+data class CreateOrderResponse(
+    val id: Long?,
+    val items: List<ItemDTO>?
 )

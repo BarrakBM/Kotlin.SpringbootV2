@@ -8,10 +8,8 @@ data class CreateItemRequestDTO(
 )
 
 data class ItemDTO(
-    val id: Long?,
     val name: String,
     val quantity: Int,
-    val orderId: Long?
 )
 
 data class ItemsListDTO(

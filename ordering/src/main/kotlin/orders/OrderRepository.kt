@@ -8,7 +8,9 @@ import jakarta.persistence.*
 import org.springframework.data.jpa.repository.JpaRepository
 
 @Named
-interface OrderRepository : JpaRepository<OrderEntity, Long>
+interface OrderRepository : JpaRepository<OrderEntity, Long> {
+    fun findByUserId(userId: Long): List<OrderEntity>
+}
 
 @Entity
 @Table(name = "orders")
@@ -18,14 +20,14 @@ data class OrderEntity(
     val id: Long? = null,
 
     @ManyToOne
-    val user: UserEntity,
+    val userId: Long,
 
     // join
-    @OneToMany(mappedBy = "order")
+    @OneToMany
     val items: List<ItemEntity>? = null
 
 
 ){
-    constructor(): this(null, UserEntity(), listOf())
+    constructor(): this(null, 0, listOf())
 
 }

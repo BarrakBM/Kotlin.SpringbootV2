@@ -12,7 +12,7 @@ interface UsersRepository : JpaRepository<UserEntity, Long> {
 }
 
 @Entity
-@Table(name = "authentication/users")
+@Table(name = "users")
 data class UserEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
