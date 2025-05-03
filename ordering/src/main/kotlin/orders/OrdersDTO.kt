@@ -1,6 +1,6 @@
-package orders
+package ordering.orders
 
-import items.ItemDTO
+import ordering.items.ItemDTO
 
 // return this when user asking for order list
 data class OrderDTO(

@@ -1,15 +1,15 @@
-package orders
+package ordering.orders
 
 import authentication.users.UsersRepository
-import items.ItemDTO
-import items.ItemEntity
-import items.ItemsRepository
+
 import jakarta.inject.Named
+import ordering.items.ItemDTO
+import ordering.items.ItemEntity
+import ordering.items.ItemsRepository
 
 @Named
 class OrderService(
     private val orderRepository: OrderRepository,
-    private val userRepository: UsersRepository,
     private val itemsRepository: ItemsRepository
 ) {
 

@@ -34,7 +34,7 @@ class SecurityConfig(
                     .requestMatchers("/authentication/**").permitAll()
                     .requestMatchers("/authentication/login").permitAll()
                     .requestMatchers("/hello").permitAll()
-                    .requestMatchers("/authentication/check-token").permitAll()
+                    .requestMatchers("/authentication/check-token").authenticated()
                     // swagger
                     .requestMatchers("/api-docs").permitAll()
                     // registration endpoint

@@ -1,8 +1,8 @@
-package security
+package ordering.security
 
-import client.AuthenticationClient
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.*
+import ordering.client.AuthenticationClient
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 

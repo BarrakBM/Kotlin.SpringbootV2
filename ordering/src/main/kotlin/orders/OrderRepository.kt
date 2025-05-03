@@ -1,10 +1,9 @@
-package orders
+package ordering.orders
 
 
-import authentication.users.UserEntity
-import items.ItemEntity
 import jakarta.inject.Named
 import jakarta.persistence.*
+import ordering.items.ItemEntity
 import org.springframework.data.jpa.repository.JpaRepository
 
 @Named
@@ -19,7 +18,7 @@ data class OrderEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
-    @ManyToOne
+    @Column(name = "user_id")
     val userId: Long,
 
     // join

@@ -1,10 +1,9 @@
-package client
+package ordering.client
 
 import authentication.CheckTokenResponse
 import jakarta.inject.Named
 import org.springframework.core.ParameterizedTypeReference
 import org.springframework.http.*
-import org.springframework.util.MultiValueMap
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.client.exchange
 
